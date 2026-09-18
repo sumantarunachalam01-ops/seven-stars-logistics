@@ -1,0 +1,39 @@
+[
+  {
+    "name": "Rajesh Kumar",
+    "company": "Kumar Industrial Impex",
+    "email": "rajesh@kumarimpex.in",
+    "phone": "+91 98401 23456",
+    "origin": "Chennai Sea Port (INMAA)",
+    "destination": "Dubai Jebel Ali (AEJEA)",
+    "service": "ocean-fcl",
+    "cargo_type": "Industrial Machinery Parts",
+    "weight": "12000",
+    "volume": "25",
+    "transport_mode": "ocean",
+    "shipment_date": "",
+    "incoterms": "FOB",
+    "message": "Please quote 1x40ft HC container rate with in-house customs clearance at Chennai port.",
+    "Reference Code": "SSL-RFQ-2026-8450",
+    "_cc": "info@sevenstarslogistics.com",
+    "_subject": "[New Quote Request] SSL-RFQ-2026-8450 - Ocean Freight - Full Container (FCL) (Chennai Sea Port (INMAA) to Dubai Jebel Ali (AEJEA))",
+    "_template": "table",
+    "_captcha": "false",
+    "referenceCode": "SSL-RFQ-2026-8450",
+    "receivedAt": "2026-09-17T19:45:33.670Z"
+  },
+  {
+    "Reference Code": "SSL-RFQ-2026-TEST",
+    "name": "Test Customer",
+    "company": "Global Freight Test Co",
+    "email": "test@customer.com",
+    "phone": "+91 99999 88888",
+    "origin": "Chennai Port (INMAA)",
+    "destination": "Hamburg (DEHAM)",
+    "service": "ocean-fcl",
+    "weight": "5000",
+    "volume": "15",
+    "message": "Test quotation inquiry verification",
+    "receivedAt": "2026-09-17T19:44:32.774Z"
+  }
+]
