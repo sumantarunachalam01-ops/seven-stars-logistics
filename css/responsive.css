@@ -92,7 +92,7 @@ img, svg, video, canvas {
   .process-timeline::before {
     top: 0;
     bottom: 0;
-    left: 36px;
+    left: 27px;
     right: auto;
     width: 2px;
     height: 100%;
