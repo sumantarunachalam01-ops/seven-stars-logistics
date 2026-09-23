@@ -15,13 +15,42 @@
   font-size: 0.875rem;
   font-weight: var(--fw-semibold);
   line-height: 1;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-md);
+  padding: 0.8rem 1.65rem;
+  border-radius: 9999px;
   border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
   transition: all var(--transition-fast);
   white-space: nowrap;
+}
+
+.btn-pill {
+  border-radius: 9999px !important;
+}
+
+.link-chevron {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9375rem;
+  font-weight: var(--fw-semibold);
+  color: var(--color-blue-700);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.link-chevron:hover {
+  color: var(--color-blue-800);
+}
+
+.link-chevron svg {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--transition-fast);
+}
+
+.link-chevron:hover svg {
+  transform: translateX(3px);
 }
 
 .btn:hover {
@@ -330,6 +359,125 @@
 
 .action-tab-pane.active {
   display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Company Narrative (Who We Are)
+   -------------------------------------------------------------------------- */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+.intro-desc {
+  color: var(--text-body);
+  margin-bottom: 1.5rem;
+  line-height: 1.65;
+}
+
+.intro-pills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+
+.intro-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--text-heading);
+  font-weight: 500;
+}
+
+.intro-pill svg {
+  color: var(--color-blue-600);
+  flex-shrink: 0;
+}
+
+.intro-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.intro-media-card {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.intro-media-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.intro-media-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(6, 19, 37, 0.94), transparent);
+  padding: 1.75rem 1.5rem;
+  color: #ffffff;
+}
+
+.intro-media-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-gold-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.intro-media-title {
+  font-size: 1.05rem;
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Industry Sector Cards
+   -------------------------------------------------------------------------- */
+.solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.solution-card {
+  background-color: var(--bg-surface);
+  padding: 1.75rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-base);
+}
+
+.solution-card:hover {
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.solution-card-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--primary-900);
+}
+
+.solution-card-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
 }
 
 /* --------------------------------------------------------------------------
