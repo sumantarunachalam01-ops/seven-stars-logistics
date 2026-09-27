@@ -443,10 +443,10 @@
 
 .footer-brand-logo {
   display: inline-block;
-  background: #ffffff;
-  padding: 6px 14px;
-  border-radius: var(--radius-md);
-  max-width: 360px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  max-width: 380px;
 }
 
 .footer-brand-logo img {
