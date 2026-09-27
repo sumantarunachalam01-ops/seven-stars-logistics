@@ -159,3 +159,48 @@ function initFaqAccordion() {
     });
   });
 }
+
+/**
+ * DSV-Inspired Quick Action Bar: Tabs & Quick Track Handler
+ */
+function initDsvActionBar() {
+  const tabs = document.querySelectorAll('.dsv-tab-btn');
+  const modeInput = document.getElementById('dsv-selected-mode');
+  if (tabs.length && modeInput) {
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+        modeInput.value = tab.getAttribute('data-mode') || 'Ocean Freight';
+      });
+    });
+  }
+
+  const trackBtn = document.getElementById('dsv-track-submit-btn');
+  const trackInput = document.getElementById('dsv-track-num');
+  if (trackBtn && trackInput) {
+    const handleTrack = () => {
+      const val = trackInput.value.trim();
+      if (!val) {
+        alert('Please enter a valid shipment reference or Bill of Lading number.');
+        trackInput.focus();
+        return;
+      }
+      window.location.href = `contact.html?ref=${encodeURIComponent(val)}#contact-form`;
+    };
+
+    trackBtn.addEventListener('click', handleTrack);
+    trackInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleTrack();
+      }
+    });
+  }
+}
+
+// Call on load
+document.addEventListener('DOMContentLoaded', () => {
+  initDsvActionBar();
+});
+

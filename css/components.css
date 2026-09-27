@@ -1605,3 +1605,188 @@
   text-align: center;
   line-height: 1.5;
 }
+
+/* --------------------------------------------------------------------------
+   DSV-Inspired Quick Action Bar (Overlapping Hero Widget)
+   -------------------------------------------------------------------------- */
+.dsv-action-bar-wrapper {
+  position: relative;
+  z-index: 25;
+  margin-top: -5rem;
+  margin-bottom: 3.5rem;
+}
+
+.dsv-action-bar {
+  display: grid;
+  grid-template-columns: 1fr 2.1fr 1fr;
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 36px -4px rgba(0, 32, 74, 0.12), 0 4px 12px -2px rgba(0, 32, 74, 0.04);
+}
+
+.dsv-box {
+  padding: 1.85rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+}
+
+.dsv-box:not(:last-child) {
+  border-right: 1px solid var(--border-light);
+}
+
+.dsv-box-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary-900);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.2px;
+}
+
+.dsv-box-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.15rem;
+}
+
+/* Quote Box Tabs with Icons */
+.dsv-quote-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.dsv-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  color: var(--text-body);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dsv-tab-btn svg {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+.dsv-tab-btn:hover {
+  border-color: var(--color-blue-700);
+  color: var(--color-blue-700);
+}
+
+.dsv-tab-btn.active {
+  background-color: var(--color-blue-700);
+  border-color: var(--color-blue-700);
+  color: #ffffff;
+}
+
+.dsv-tab-btn.active svg {
+  stroke: #ffffff;
+}
+
+.dsv-quote-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.dsv-quote-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.dsv-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.dsv-form-field label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.dsv-form-field input,
+.dsv-form-field select {
+  padding: 0.65rem 0.85rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  background-color: #ffffff;
+  color: var(--text-main);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.dsv-form-field input:focus,
+.dsv-form-field select:focus {
+  border-color: var(--color-blue-700);
+  box-shadow: 0 0 0 3px var(--color-blue-100);
+}
+
+/* Track Box (Matching DSV Layout) */
+.dsv-track-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dsv-track-input-wrap input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  background-color: #ffffff;
+  color: var(--text-main);
+  outline: none;
+}
+
+.dsv-track-input-wrap input:focus {
+  border-color: var(--color-blue-700);
+  box-shadow: 0 0 0 3px var(--color-blue-100);
+}
+
+@media (max-width: 992px) {
+  .dsv-action-bar-wrapper {
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  .dsv-action-bar {
+    grid-template-columns: 1fr;
+  }
+  .dsv-box {
+    padding: 1.5rem 1.25rem;
+  }
+  .dsv-box:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .dsv-quote-fields {
+    grid-template-columns: 1fr;
+  }
+  .dsv-tab-btn {
+    flex: 1 1 calc(50% - 0.3rem);
+    justify-content: center;
+    padding: 0.55rem 0.5rem;
+  }
+}
+

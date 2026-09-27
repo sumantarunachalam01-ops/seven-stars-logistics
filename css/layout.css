@@ -6,11 +6,11 @@
    Top Utility Bar
    -------------------------------------------------------------------------- */
 .top-bar {
-  background-color: var(--primary-900);
-  color: #cbd5e1;
+  background-color: #f8fafc;
+  color: var(--text-body);
   font-size: 0.8125rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .top-bar-inner {
@@ -31,31 +31,32 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: #cbd5e1;
+  color: var(--text-muted);
 }
 
 .top-bar-item a {
-  color: #f1f5f9;
-  font-weight: var(--fw-medium);
+  color: var(--color-blue-700);
+  font-weight: var(--fw-semibold);
 }
 
 .top-bar-item a:hover {
-  color: #ffffff;
+  color: var(--color-blue-800);
+  text-decoration: underline;
 }
 
 .top-bar-item svg {
   width: 14px;
   height: 14px;
-  color: var(--color-blue-500);
+  color: var(--color-blue-700);
 }
 
 .top-bar-badge {
-  background-color: rgba(2, 132, 199, 0.2);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  background-color: var(--color-blue-50);
+  color: var(--color-blue-700);
+  border: 1px solid var(--color-blue-100);
   font-size: 0.75rem;
   font-weight: var(--fw-semibold);
-  padding: 0.15rem 0.5rem;
+  padding: 0.2rem 0.6rem;
   border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
@@ -176,6 +177,26 @@
 
 .nav-link.active::after {
   width: 100%;
+}
+
+.nav-link.nav-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-dropdown-toggle svg {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  stroke-width: 2.2;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+  margin-top: 1px;
+}
+
+.nav-dropdown-wrapper:hover .nav-dropdown-toggle svg {
+  transform: rotate(180deg);
 }
 
 /* Header Actions */

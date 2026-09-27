@@ -32,10 +32,10 @@
 
   /* Clean Corporate Surfaces & Backgrounds */
   --bg-body:       #ffffff;
-  --bg-surface:    #f4f6f9;  /* Crisp DSV Neutral Section Fill */
+  --bg-surface:    #ffffff;  /* Pure White Surface */
   --bg-elevated:   #ffffff;
-  --bg-alt:        #edf1f6;
-  --bg-dark:       #00204a;  /* Authoritative Corporate Deep Navy */
+  --bg-alt:        #f8fafc;  /* Subtle crisp off-white alternate fill */
+  --bg-dark:       #00204a;  /* Authoritative Corporate Deep Navy (Footer/Hero) */
   --bg-dark-card:  #002b5e;
 
   /* Authoritative High-Contrast Typography */
