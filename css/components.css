@@ -1676,15 +1676,16 @@
 
 .dsv-action-bar {
   display: grid;
-  grid-template-columns: 1fr 2.1fr 1fr;
+  grid-template-columns: 360px 1fr;
   background-color: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
   box-shadow: 0 12px 36px -4px rgba(0, 32, 74, 0.12), 0 4px 12px -2px rgba(0, 32, 74, 0.04);
+  overflow: hidden;
 }
 
 .dsv-box {
-  padding: 1.85rem 2rem;
+  padding: 1.85rem 2.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1713,8 +1714,8 @@
 /* Quote Box Tabs with Icons */
 .dsv-quote-tabs {
   display: flex;
-  gap: 0.4rem;
-  margin-bottom: 1.2rem;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -1722,7 +1723,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.5rem 0.85rem;
+  padding: 0.5rem 0.95rem;
   font-size: 0.8125rem;
   font-weight: 600;
   background-color: #ffffff;
@@ -1735,8 +1736,8 @@
 
 .dsv-tab-btn svg {
   display: inline-block;
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   stroke: currentColor;
   flex-shrink: 0;
 }
@@ -1764,8 +1765,9 @@
 
 .dsv-quote-fields {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 0.85rem;
+  align-items: flex-end;
 }
 
 .dsv-form-field {
@@ -1784,7 +1786,8 @@
 
 .dsv-form-field input,
 .dsv-form-field select {
-  padding: 0.65rem 0.85rem;
+  height: 42px;
+  padding: 0 0.85rem;
   font-size: 0.875rem;
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-sm);
@@ -1800,27 +1803,16 @@
   box-shadow: 0 0 0 3px var(--color-blue-100);
 }
 
-/* Track Box (Matching DSV Layout) */
-.dsv-track-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.dsv-track-input-wrap input {
-  width: 100%;
-  padding: 0.65rem 0.85rem;
+.dsv-submit-btn {
+  height: 42px;
+  padding: 0 1.6rem;
+  min-width: 130px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
   font-size: 0.875rem;
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-sm);
-  background-color: #ffffff;
-  color: var(--text-main);
-  outline: none;
-}
-
-.dsv-track-input-wrap input:focus {
-  border-color: var(--color-blue-700);
-  box-shadow: 0 0 0 3px var(--color-blue-100);
+  font-weight: 600;
 }
 
 @media (max-width: 992px) {
@@ -1831,15 +1823,18 @@
   .dsv-action-bar {
     grid-template-columns: 1fr;
   }
-  .dsv-box {
-    padding: 1.5rem 1.25rem;
-  }
   .dsv-box:not(:last-child) {
     border-right: none;
     border-bottom: 1px solid var(--border-light);
   }
+  .dsv-box {
+    padding: 1.5rem 1.25rem;
+  }
   .dsv-quote-fields {
     grid-template-columns: 1fr;
+  }
+  .dsv-submit-btn {
+    width: 100%;
   }
   .dsv-tab-btn {
     flex: 1 1 calc(50% - 0.3rem);
@@ -1847,4 +1842,5 @@
     padding: 0.55rem 0.5rem;
   }
 }
+
 
