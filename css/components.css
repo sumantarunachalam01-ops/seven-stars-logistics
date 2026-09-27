@@ -1130,6 +1130,31 @@
   box-shadow: 0 10px 30px -4px rgba(0, 32, 74, 0.08);
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.autopilot-grid-main {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.autopilot-grid-listings {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.ftwz-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .autopilot-tagline-badge {
@@ -1146,6 +1171,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 1.25rem;
+  max-width: 100%;
 }
 
 .autopilot-motto {
@@ -1157,6 +1183,47 @@
   color: var(--text-body);
   font-style: italic;
   margin: 1.25rem 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 991px) {
+  .autopilot-hero-card {
+    padding: 2rem 1.5rem;
+  }
+  .autopilot-grid-main,
+  .autopilot-grid-listings,
+  .ftwz-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.75rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .autopilot-hero-card {
+    padding: 1.5rem 1.15rem !important;
+    border-radius: var(--radius-md);
+  }
+  .autopilot-tagline-badge {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.65rem;
+  }
+  .autopilot-hero-card h2,
+  #autopilot-title {
+    font-size: 1.55rem !important;
+    line-height: 1.25 !important;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .autopilot-hero-card p {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .autopilot-motto {
+    font-size: 0.875rem !important;
+    padding: 0.75rem 1rem !important;
+  }
 }
 
 .workflow-container {
@@ -1517,6 +1584,23 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+}
+
+@media (max-width: 991px) {
+  .why-grid-9 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .why-grid-9 {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .why-pillar-card {
+    padding: 1.35rem 1.15rem !important;
+  }
 }
 
 .why-pillar-card {

@@ -195,7 +195,11 @@
 
         <!-- Mobile Hamburger Toggle -->
         <button type="button" class="menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" y1="6" x2="20" y2="6"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="18" x2="20" y2="18"></line>
+          </svg>
         </button>
       </div>
     </div>
@@ -702,14 +706,14 @@
     <section class="section" id="autopilot" aria-labelledby="autopilot-title" style="background-color: var(--bg-alt); padding: 4rem 0;">
       <div class="container">
         <div class="autopilot-hero-card">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: center; margin-bottom: 2rem;">
+          <div class="autopilot-grid-main">
             <div>
               <div class="autopilot-tagline-badge">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                 <span>Managed Logistics Operations</span>
               </div>
 
-              <h2 id="autopilot-title" style="font-size: clamp(2rem, 3.2vw, 2.75rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.75rem; color: var(--primary-900);">
+              <h2 id="autopilot-title" style="font-size: clamp(1.65rem, 3.2vw, 2.75rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.75rem; color: var(--primary-900);">
                 Run Your India Logistics Operations on Autopilot
               </h2>
 
@@ -728,7 +732,7 @@
           </div>
 
           <!-- Structured Activities Listings: Inbound & Outbound -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+          <div class="autopilot-grid-listings">
             <!-- Inbound / Import Activities -->
             <div style="background: #ffffff; border: 1px solid var(--border-light); border-top: 3px solid var(--color-blue-700); border-radius: var(--radius-md); padding: 1.5rem;">
               <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.85rem;">
@@ -917,7 +921,7 @@
           <h2 id="ftwz-title" style="font-size: 1.85rem; color: var(--primary-900); margin-bottom: 1rem;">
             FTWZ &amp; SEZ Logistics Solutions
           </h2>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: center; margin-bottom: 1.5rem;">
+          <div class="ftwz-grid">
             <div>
               <p style="color: var(--text-body); line-height: 1.65; margin-bottom: 1.25rem;">
                 We provide warehousing, inventory management, customs coordination, and trade logistics support for businesses utilizing Free Trade Warehousing Zones (FTWZ) and Special Economic Zones (SEZ).
