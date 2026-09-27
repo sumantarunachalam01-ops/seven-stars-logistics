@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 70" width="300" height="70" role="img" aria-label="FFFFAI Member">
+  <defs>
+    <linearGradient id="ffGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F5132" />
+      <stop offset="100%" stop-color="#08331E" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(18, 5)">
+    <circle cx="30" cy="30" r="26" fill="url(#ffGrad)" />
+    <circle cx="30" cy="30" r="23" fill="none" stroke="#ffffff" stroke-width="1.5" />
+    <ellipse cx="30" cy="30" rx="12" ry="22" fill="none" stroke="#22C55E" stroke-width="1.3" opacity="0.8" />
+    <line x1="8" y1="30" x2="52" y2="30" stroke="#22C55E" stroke-width="1.3" opacity="0.8" />
+    <path d="M 18 34 L 42 34 L 38 41 L 22 41 Z" fill="#ffffff" />
+    <path d="M 30 15 L 34 24 L 41 25 L 33 27 L 34 32 L 30 29 L 26 32 L 27 27 L 19 25 L 26 24 Z" fill="#FF9933" />
+  </g>
+  <!-- Text Content -->
+  <text x="90" y="33" font-family="'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="900" fill="#08331E" letter-spacing="1px">FFFFAI</text>
+  <text x="90" y="48" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="700" fill="#15803D" letter-spacing="0.8px">FREIGHT FORWARDERS FEDERATION</text>
+  <text x="90" y="61" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" fill="#64748b" letter-spacing="0.4px">MEMBER ASSOCIATION (INDIA)</text>
+</svg>

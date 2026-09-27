@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 70" width="300" height="70" role="img" aria-label="ISO 9001:2015">
+  <defs>
+    <linearGradient id="isoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E11D48" />
+      <stop offset="100%" stop-color="#BE123C" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(18, 5)">
+    <rect x="4" y="4" width="52" height="52" rx="12" fill="url(#isoGrad)" />
+    <circle cx="30" cy="30" r="20" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.9" />
+    <ellipse cx="30" cy="30" rx="10" ry="20" fill="none" stroke="#ffffff" stroke-width="1.4" opacity="0.9" />
+    <line x1="10" y1="30" x2="50" y2="30" stroke="#ffffff" stroke-width="1.4" opacity="0.9" />
+    <text x="30" y="35" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1px">ISO</text>
+  </g>
+  <!-- Text Content -->
+  <text x="92" y="32" font-family="'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="900" fill="#0b1526" letter-spacing="0.5px">ISO 9001:2015</text>
+  <text x="92" y="48" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="700" fill="#E11D48" letter-spacing="1px">CERTIFIED ORGANIZATION</text>
+  <text x="92" y="61" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" fill="#64748b" letter-spacing="0.3px">Quality Management System</text>
+</svg>

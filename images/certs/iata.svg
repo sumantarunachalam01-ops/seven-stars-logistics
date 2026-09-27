@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 70" width="300" height="70" role="img" aria-label="IATA">
+  <!-- IATA Wings and Globe Emblem -->
+  <g transform="translate(15, 5)">
+    <circle cx="30" cy="30" r="26" fill="#00205B" />
+    <circle cx="30" cy="30" r="23" fill="#004B87" />
+    <ellipse cx="30" cy="30" rx="12" ry="23" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.85" />
+    <ellipse cx="30" cy="30" rx="22" ry="10" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.85" />
+    <line x1="7" y1="30" x2="53" y2="30" stroke="#ffffff" stroke-width="1.6" opacity="0.85" />
+    <line x1="30" y1="7" x2="30" y2="53" stroke="#ffffff" stroke-width="1.6" opacity="0.85" />
+    <!-- Stylized Wings -->
+    <path d="M 6 20 L -6 14 L 2 25 Z" fill="#00205B" />
+    <path d="M 4 28 L -8 25 L 2 33 Z" fill="#00205B" />
+    <path d="M 54 20 L 66 14 L 58 25 Z" fill="#00205B" />
+    <path d="M 56 28 L 68 25 L 58 33 Z" fill="#00205B" />
+  </g>
+  <!-- IATA Text -->
+  <text x="96" y="42" font-family="'Helvetica Neue', Arial, sans-serif" font-size="34" font-weight="900" fill="#00205B" letter-spacing="2px">IATA</text>
+  <text x="96" y="58" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="700" fill="#0077C8" letter-spacing="1.5px">CARGO AGENT</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 70" width="300" height="70" role="img" aria-label="Licensed Customs Broker">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37" />
+      <stop offset="50%" stop-color="#F6E7B0" />
+      <stop offset="100%" stop-color="#AA771C" />
+    </linearGradient>
+    <linearGradient id="navyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a2540" />
+      <stop offset="100%" stop-color="#041426" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(18, 5)">
+    <!-- Outer Shield -->
+    <path d="M 28 3 L 50 11 C 50 33 40 50 28 55 C 16 50 6 33 6 11 Z" fill="url(#navyGrad)" stroke="url(#goldGrad)" stroke-width="2.5" />
+    <!-- Inner Anchor & Balance Scales -->
+    <circle cx="28" cy="18" r="4" fill="none" stroke="url(#goldGrad)" stroke-width="1.8" />
+    <line x1="28" y1="22" x2="28" y2="40" stroke="url(#goldGrad)" stroke-width="2.2" />
+    <line x1="17" y1="25" x2="39" y2="25" stroke="url(#goldGrad)" stroke-width="1.8" />
+    <path d="M 17 25 L 12 33 L 22 33 Z" fill="none" stroke="url(#goldGrad)" stroke-width="1.4" />
+    <path d="M 39 25 L 34 33 L 44 33 Z" fill="none" stroke="url(#goldGrad)" stroke-width="1.4" />
+    <path d="M 19 36 C 19 44 37 44 37 36" fill="none" stroke="url(#goldGrad)" stroke-width="2.2" />
+  </g>
+  <!-- Text Content -->
+  <text x="88" y="27" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="800" fill="#0056B3" letter-spacing="1.2px">INDIAN CUSTOMS</text>
+  <text x="88" y="47" font-family="'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="900" fill="#0b1526" letter-spacing="0.5px">CUSTOMS BROKER</text>
+  <text x="88" y="60" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" fill="#64748b" letter-spacing="0.4px">GOVT. LICENSED (CBIC)</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 70" width="300" height="70" role="img" aria-label="CCBA Member">
+  <g transform="translate(18, 5)">
+    <circle cx="30" cy="30" r="25" fill="#03254C" />
+    <circle cx="30" cy="30" r="21" fill="#0056B3" />
+    <line x1="30" y1="9" x2="30" y2="51" stroke="#D4AF37" stroke-width="1.8" />
+    <line x1="9" y1="30" x2="51" y2="30" stroke="#D4AF37" stroke-width="1.8" />
+    <line x1="15" y1="15" x2="45" y2="45" stroke="#D4AF37" stroke-width="1.8" />
+    <line x1="15" y1="45" x2="45" y2="15" stroke="#D4AF37" stroke-width="1.8" />
+    <circle cx="30" cy="30" r="9" fill="#03254C" stroke="#D4AF37" stroke-width="1.6" />
+    <circle cx="30" cy="25" r="1.8" fill="#ffffff" />
+    <line x1="30" y1="27" x2="30" y2="36" stroke="#ffffff" stroke-width="1.6" />
+    <path d="M 25 33 C 25 37 35 37 35 33" fill="none" stroke="#ffffff" stroke-width="1.6" />
+  </g>
+  <!-- Text Content -->
+  <text x="90" y="33" font-family="'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="900" fill="#03254C" letter-spacing="1.5px">CCBA</text>
+  <text x="90" y="48" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="700" fill="#0056B3" letter-spacing="0.8px">CHENNAI CUSTOMS BROKERS</text>
+  <text x="90" y="61" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9" font-weight="600" fill="#64748b" letter-spacing="0.4px">ASSOCIATION (ACTIVE MEMBER)</text>
+</svg>
