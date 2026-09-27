@@ -188,12 +188,14 @@ img, svg, video, canvas {
   }
 
   .header-logo {
-    max-width: 240px;
+    max-width: calc(100% - 70px);
   }
 
   .header-logo img,
   .header-logo svg {
-    height: 34px;
+    height: 32px;
+    max-width: 100%;
+    object-fit: contain;
   }
 
   .header-actions .btn {
@@ -905,12 +907,14 @@ img, svg, video, canvas {
    -------------------------------------------------------------------------- */
 @media (max-width: 540px) {
   .header-logo {
-    max-width: 220px;
+    max-width: calc(100% - 65px);
   }
 
   .header-logo img,
   .header-logo svg {
-    height: 30px;
+    height: 28px;
+    max-width: 100%;
+    object-fit: contain;
   }
 
   .hero-title {
@@ -927,12 +931,14 @@ img, svg, video, canvas {
    -------------------------------------------------------------------------- */
 @media (max-width: 360px) {
   .header-logo {
-    max-width: 190px;
+    max-width: calc(100% - 55px);
   }
 
   .header-logo img,
   .header-logo svg {
-    height: 26px;
+    height: 24px;
+    max-width: 100%;
+    object-fit: contain;
   }
 
   .hero-title {

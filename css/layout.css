@@ -105,24 +105,27 @@
   height: 70px;
 }
 
-/* Brand Logo */
+/* Brand Logo - Single Line Bold Layout */
 .header-logo {
   display: flex;
   align-items: center;
   text-decoration: none;
-  max-width: 420px;
+  max-width: 480px;
+  flex-shrink: 0;
 }
 
 .header-logo img,
 .header-logo svg {
-  height: 48px;
+  height: 44px;
   width: auto;
+  max-width: 100%;
+  display: block;
   transition: height var(--transition-base);
 }
 
 .site-header.header-scrolled .header-logo img,
 .site-header.header-scrolled .header-logo svg {
-  height: 42px;
+  height: 38px;
 }
 
 /* Navigation Links */
@@ -418,7 +421,17 @@
 }
 
 .footer-brand-logo {
-  max-width: 320px;
+  display: inline-block;
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  max-width: 360px;
+}
+
+.footer-brand-logo img {
+  height: 38px;
+  width: auto;
+  display: block;
 }
 
 .footer-brand-desc {
