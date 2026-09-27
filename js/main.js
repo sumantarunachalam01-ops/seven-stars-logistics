@@ -10,7 +10,45 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initDynamicYear();
   initFaqAccordion();
+  initHeroVideoAutoplay();
 });
+
+/**
+ * Mobile & iOS Safari Autoplay Assurance
+ */
+function initHeroVideoAutoplay() {
+  const video = document.querySelector('.hero-video');
+  if (!video) return;
+
+  // iOS Safari requires programmatic muted & playsInline
+  video.muted = true;
+  video.defaultMuted = true;
+  video.playsInline = true;
+
+  const playVideo = () => {
+    const promise = video.play();
+    if (promise !== undefined) {
+      promise.catch(() => {
+        // Fallback for Low Power Mode: start immediately on first user touch/scroll
+        const triggerPlay = () => {
+          video.play().catch(() => {});
+          ['touchstart', 'touchend', 'click', 'scroll'].forEach(evt => {
+            window.removeEventListener(evt, triggerPlay);
+          });
+        };
+        ['touchstart', 'touchend', 'click', 'scroll'].forEach(evt => {
+          window.addEventListener(evt, triggerPlay, { once: true, passive: true });
+        });
+      });
+    }
+  };
+
+  if (video.readyState >= 2) {
+    playVideo();
+  } else {
+    video.addEventListener('loadeddata', playVideo, { once: true });
+  }
+}
 
 /**
  * Sticky Navigation with backdrop blur on scroll

@@ -325,17 +325,45 @@
 }
 
 .mobile-drawer-close {
-  background: none;
-  border: 1px solid var(--border-light);
+  background: #ffffff;
+  border: 1.5px solid var(--border-medium);
   border-radius: var(--radius-md);
-  padding: 0.5rem;
+  padding: 0;
   cursor: pointer;
-  color: var(--text-muted);
+  color: var(--primary-900);
+  width: 44px;
+  height: 44px;
   min-width: 44px;
   min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all var(--transition-fast);
+}
+
+.mobile-drawer-close svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--primary-900);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+  flex-shrink: 0;
+  transition: stroke var(--transition-fast);
+}
+
+.mobile-drawer-close:hover,
+.mobile-drawer-close:active {
+  background-color: var(--color-blue-50);
+  border-color: var(--color-blue-300);
+}
+
+.mobile-drawer-close:hover svg,
+.mobile-drawer-close:active svg {
+  stroke: var(--color-blue-700);
 }
 
 .mobile-drawer-body {

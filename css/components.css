@@ -184,6 +184,18 @@
   object-fit: cover;
   object-position: center;
   filter: brightness(1.02) contrast(1.02);
+  pointer-events: none;
+}
+
+.hero-media video::-webkit-media-controls,
+.hero-media video::-webkit-media-controls-start-playback-button,
+.hero-media video::-webkit-media-controls-play-button,
+.hero-media video::-webkit-media-controls-enclosure,
+.hero-media video::-webkit-media-controls-panel {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .hero-overlay {
