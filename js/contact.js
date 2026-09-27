@@ -122,3 +122,56 @@ function initContactForm() {
     });
   });
 }
+
+/**
+ * Handle Homepage 10-Field Enquiry Form
+ */
+function initHomeEnquiryForm() {
+  const homeForm = document.getElementById('home-enquiry-form');
+  const modal = document.getElementById('form-success-modal');
+  const modalClose = document.getElementById('modal-close-btn');
+
+  if (modal && modalClose) {
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  }
+
+  if (!homeForm) return;
+
+  homeForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const submitBtn = homeForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Submitting Enquiry...';
+
+    const formData = new FormData(homeForm);
+    const payload = Object.fromEntries(formData.entries());
+
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(err => {
+      console.warn('Enquiry dispatch notice:', err);
+    }).finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+      homeForm.reset();
+      if (modal) {
+        modal.classList.add('active');
+      }
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initHomeEnquiryForm();
+});
