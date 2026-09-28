@@ -199,17 +199,62 @@ function initFaqAccordion() {
 }
 
 /**
- * DSV-Inspired Quick Action Bar: Tabs & Quick Track Handler
+ * DSV-Inspired Quick Action Bar: Tabs, Dynamic Contextual Labels, & Quick Track Handler
  */
 function initDsvActionBar() {
   const tabs = document.querySelectorAll('.dsv-tab-btn');
   const modeInput = document.getElementById('dsv-selected-mode');
+  const originLabel = document.getElementById('dsv-origin-label');
+  const destLabel = document.getElementById('dsv-destination-label');
+  const originInput = document.getElementById('dsv-origin');
+  const destInput = document.getElementById('dsv-destination');
+  const noteEl = document.getElementById('dsv-quote-note');
+
+  const tabConfigs = {
+    'Ocean Freight': {
+      label1: 'From',
+      placeholder1: 'Select Location / Origin Port',
+      label2: 'To',
+      placeholder2: 'Select Location / Destination Port',
+      note: 'Direct commercial tariff schedules verified across major Indian ports and international trade lanes.'
+    },
+    'Air Freight': {
+      label1: 'Departure Airport',
+      placeholder1: 'Origin Airport / City (e.g. MAA, BOM, FRA)',
+      label2: 'Arrival Airport',
+      placeholder2: 'Destination Airport / City (e.g. DXB, SIN, LHR)',
+      note: 'Priority air freight charter, scheduled consolidations, and expedited transit schedules.'
+    },
+    'International Courier': {
+      label1: 'Pickup Location',
+      placeholder1: 'Pickup City / Pincode (e.g. Chennai 600001)',
+      label2: 'Delivery Destination',
+      placeholder2: 'Destination Country / City (e.g. USA, Germany, UAE)',
+      note: 'Express door-to-door courier dispatch, document clearance, and international sample logistics.'
+    },
+    'Warehousing': {
+      label1: 'Warehouse Location',
+      placeholder1: 'City / Hub (e.g. Chennai FTWZ, Sri City, Mumbai)',
+      label2: 'Storage Type / Space',
+      placeholder2: 'e.g. FTWZ / Bonded, 50 Pallets, 2,000 Sq Ft',
+      note: 'Customs bonded warehousing, FTWZ duty deferment, and temperature-controlled storage facilities.'
+    }
+  };
+
   if (tabs.length && modeInput) {
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
         tabs.forEach((t) => t.classList.remove('active'));
         tab.classList.add('active');
-        modeInput.value = tab.getAttribute('data-mode') || 'Ocean Freight';
+        const mode = tab.getAttribute('data-mode') || 'Ocean Freight';
+        modeInput.value = mode;
+
+        const cfg = tabConfigs[mode] || tabConfigs['Ocean Freight'];
+        if (originLabel) originLabel.textContent = cfg.label1;
+        if (originInput) originInput.placeholder = cfg.placeholder1;
+        if (destLabel) destLabel.textContent = cfg.label2;
+        if (destInput) destInput.placeholder = cfg.placeholder2;
+        if (noteEl) noteEl.textContent = cfg.note;
       });
     });
   }

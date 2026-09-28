@@ -25,22 +25,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const destEl = document.getElementById('quote-destination');
     if (destEl) destEl.value = qDest;
   }
-  if (qService) {
-    const serviceEl = document.getElementById('quote-service');
-    if (serviceEl) {
-      const qLower = qService.toLowerCase();
-      for (let i = 0; i < serviceEl.options.length; i++) {
-        const opt = serviceEl.options[i];
-        if (opt.value.toLowerCase().includes(qLower) || opt.text.toLowerCase().includes(qLower) || 
-           (qLower.includes('ocean') && opt.value.includes('ocean')) ||
-           (qLower.includes('air') && opt.value.includes('air')) ||
-           (qLower.includes('warehous') && opt.value.includes('warehous')) ||
-           (qLower.includes('pack') && opt.value.includes('pack'))) {
-          serviceEl.selectedIndex = i;
-          break;
-        }
+  const serviceEl = document.getElementById('quote-service');
+  const quoteOriginLabel = document.getElementById('quote-origin-label');
+  const quoteDestLabel = document.getElementById('quote-dest-label');
+  const quoteOriginInput = document.getElementById('quote-origin');
+  const quoteDestInput = document.getElementById('quote-destination');
+
+  const updateServiceFieldLabels = (serviceVal) => {
+    if (!quoteOriginLabel || !quoteDestLabel) return;
+    const val = (serviceVal || '').toLowerCase();
+
+    if (val.includes('warehous') || val.includes('ftwz')) {
+      quoteOriginLabel.innerHTML = 'Warehouse Hub / Facility Location <span class="required">*</span>';
+      if (quoteOriginInput) quoteOriginInput.placeholder = 'e.g. Chennai FTWZ, Sri City SEZ, Mumbai, Bangalore';
+      quoteDestLabel.innerHTML = 'Storage Type / Space Requirement <span class="required">*</span>';
+      if (quoteDestInput) quoteDestInput.placeholder = 'e.g. FTWZ Bonded / 50 Pallets / 2,000 Sq Ft / Temperature-controlled';
+      const whRadio = quoteForm.querySelector('input[name="transport_mode"][value="warehousing"]');
+      if (whRadio) whRadio.checked = true;
+    } else if (val.includes('pack')) {
+      quoteOriginLabel.innerHTML = 'Cargo Location / Factory Pickup <span class="required">*</span>';
+      if (quoteOriginInput) quoteOriginInput.placeholder = 'e.g. Chennai, Sriperumbudur, Ambattur Industrial Estate';
+      quoteDestLabel.innerHTML = 'Packaging Type / Destination Port <span class="required">*</span>';
+      if (quoteDestInput) quoteDestInput.placeholder = 'e.g. ISPM-15 Wooden Crates / Machinery Crating for Export to Germany';
+    } else {
+      quoteOriginLabel.innerHTML = 'Origin (Port, Airport, or City) <span class="required">*</span>';
+      if (quoteOriginInput) quoteOriginInput.placeholder = 'e.g. Chennai, Mumbai, or Shanghai';
+      quoteDestLabel.innerHTML = 'Destination (Port, Airport, or City) <span class="required">*</span>';
+      if (quoteDestInput) quoteDestInput.placeholder = 'e.g. Hamburg, Dubai, or Singapore';
+    }
+  };
+
+  if (serviceEl) {
+    serviceEl.addEventListener('change', () => {
+      updateServiceFieldLabels(serviceEl.value);
+    });
+  }
+
+  if (qService && serviceEl) {
+    const qLower = qService.toLowerCase();
+    for (let i = 0; i < serviceEl.options.length; i++) {
+      const opt = serviceEl.options[i];
+      if (opt.value.toLowerCase().includes(qLower) || opt.text.toLowerCase().includes(qLower) || 
+         (qLower.includes('ocean') && opt.value.includes('ocean')) ||
+         (qLower.includes('air') && opt.value.includes('air')) ||
+         (qLower.includes('warehous') && opt.value.includes('warehous')) ||
+         (qLower.includes('pack') && opt.value.includes('pack'))) {
+        serviceEl.selectedIndex = i;
+        break;
       }
     }
+    updateServiceFieldLabels(serviceEl.value);
   }
 
   // Real-time validation on blur

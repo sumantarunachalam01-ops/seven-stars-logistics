@@ -328,11 +328,11 @@
               <input type="hidden" name="mode" id="dsv-selected-mode" value="Ocean Freight">
               <div class="dsv-quote-fields">
                 <div class="dsv-form-field">
-                  <label for="dsv-origin">From</label>
+                  <label for="dsv-origin" id="dsv-origin-label">From</label>
                   <input type="text" id="dsv-origin" name="origin" placeholder="Select Location / Origin" required>
                 </div>
                 <div class="dsv-form-field">
-                  <label for="dsv-destination">To</label>
+                  <label for="dsv-destination" id="dsv-destination-label">To</label>
                   <input type="text" id="dsv-destination" name="destination" placeholder="Select Location / Destination" required>
                 </div>
                 <div class="dsv-form-field">
@@ -343,7 +343,7 @@
                   </button>
                 </div>
               </div>
-              <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.65rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.65rem;" id="dsv-quote-note">
                 Direct commercial tariff schedules verified across major Indian ports and international trade lanes.
               </div>
             </form>
