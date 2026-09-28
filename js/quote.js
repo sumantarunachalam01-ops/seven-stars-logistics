@@ -93,9 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const origin = quoteForm.querySelector('#quote-origin')?.value || 'N/A';
     const destination = quoteForm.querySelector('#quote-destination')?.value || 'N/A';
 
-    // Email dispatch parameters (Delivers to arunachalam@sevenstarslogistics.com & info@sevenstarslogistics.com)
+    // Email dispatch parameters (Delivers to arunachalam@sevenstarslogistics.com & info/support)
     formData.append('Reference Code', generatedCode);
-    formData.append('_cc', 'info@sevenstarslogistics.com');
+    formData.append('_cc', 'info@sevenstarslogistics.com,support@sevenstarslogistics.com');
     formData.append('_subject', `[New Quote Request] ${generatedCode} - ${serviceName} (${origin} to ${destination})`);
     formData.append('_template', 'table');
     formData.append('_captcha', 'false');

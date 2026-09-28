@@ -88,7 +88,7 @@ function initContactForm() {
 
     const formData = new FormData(contactForm);
     const senderName = contactForm.querySelector('#inquiry-name')?.value || 'Website Visitor';
-    formData.append('_cc', 'info@sevenstarslogistics.com');
+    formData.append('_cc', 'info@sevenstarslogistics.com,support@sevenstarslogistics.com');
     formData.append('_subject', `[Website Inquiry] New Message from ${senderName}`);
     formData.append('_template', 'table');
     formData.append('_captcha', 'false');
