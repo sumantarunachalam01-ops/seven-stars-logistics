@@ -11,6 +11,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalClose = document.getElementById('modal-close-btn');
   const refCodeEl = document.getElementById('quote-ref-code');
 
+  // Pre-fill from URL parameters (e.g. from homepage Quick Action bar)
+  const urlParams = new URLSearchParams(window.location.search);
+  const qOrigin = urlParams.get('origin');
+  const qDest = urlParams.get('destination');
+  const qService = urlParams.get('service') || urlParams.get('mode');
+
+  if (qOrigin) {
+    const originEl = document.getElementById('quote-origin');
+    if (originEl) originEl.value = qOrigin;
+  }
+  if (qDest) {
+    const destEl = document.getElementById('quote-destination');
+    if (destEl) destEl.value = qDest;
+  }
+  if (qService) {
+    const serviceEl = document.getElementById('quote-service');
+    if (serviceEl) {
+      const qLower = qService.toLowerCase();
+      for (let i = 0; i < serviceEl.options.length; i++) {
+        const opt = serviceEl.options[i];
+        if (opt.value.toLowerCase().includes(qLower) || opt.text.toLowerCase().includes(qLower) || 
+           (qLower.includes('ocean') && opt.value.includes('ocean')) ||
+           (qLower.includes('air') && opt.value.includes('air')) ||
+           (qLower.includes('warehous') && opt.value.includes('warehous')) ||
+           (qLower.includes('pack') && opt.value.includes('pack'))) {
+          serviceEl.selectedIndex = i;
+          break;
+        }
+      }
+    }
+  }
+
   // Real-time validation on blur
   const requiredInputs = quoteForm.querySelectorAll('[data-required]');
   requiredInputs.forEach((input) => {

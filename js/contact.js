@@ -43,6 +43,38 @@ function initContactForm() {
 
   const successAlert = document.getElementById('contact-success-alert');
 
+  // Handle URL parameters (e.g. ?ref=... from Quick Track on homepage or ?service=...)
+  const urlParams = new URLSearchParams(window.location.search);
+  const refParam = urlParams.get('ref') || urlParams.get('tracking');
+  const serviceParam = urlParams.get('service');
+
+  if (refParam) {
+    const msgEl = document.getElementById('inquiry-message');
+    if (msgEl) {
+      msgEl.value = `Tracking Status Request for Shipment Ref / B/L #: ${refParam}`;
+    }
+    const serviceEl = document.getElementById('inquiry-service');
+    if (serviceEl) {
+      serviceEl.value = 'Courier & Handling';
+    }
+    const targetSection = document.getElementById('contact-form') || contactForm;
+    if (targetSection) {
+      setTimeout(() => {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 350);
+    }
+  } else if (serviceParam) {
+    const serviceEl = document.getElementById('inquiry-service');
+    if (serviceEl) {
+      for (let i = 0; i < serviceEl.options.length; i++) {
+        if (serviceEl.options[i].value.toLowerCase().includes(serviceParam.toLowerCase())) {
+          serviceEl.selectedIndex = i;
+          break;
+        }
+      }
+    }
+  }
+
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -131,13 +163,21 @@ function initHomeEnquiryForm() {
   const modal = document.getElementById('form-success-modal');
   const modalClose = document.getElementById('modal-close-btn');
 
-  if (modal && modalClose) {
-    modalClose.addEventListener('click', () => {
+  const closeModal = () => {
+    if (modal) {
       modal.classList.remove('active');
-    });
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  };
+
+  if (modal) {
+    if (modalClose) {
+      modalClose.addEventListener('click', closeModal);
+    }
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
-        modal.classList.remove('active');
+        closeModal();
       }
     });
   }
@@ -147,26 +187,48 @@ function initHomeEnquiryForm() {
   homeForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    if (!homeForm.checkValidity()) {
+      homeForm.reportValidity();
+      return;
+    }
+
     const submitBtn = homeForm.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = 'Submitting Enquiry...';
 
     const formData = new FormData(homeForm);
-    const payload = Object.fromEntries(formData.entries());
+    const senderName = homeForm.querySelector('#enquiry-name')?.value || 'Website Visitor';
+    formData.append('_cc', 'info@sevenstarslogistics.com,support@sevenstarslogistics.com');
+    formData.append('_subject', `[Commercial Enquiry] New Message from ${senderName}`);
+    formData.append('_template', 'table');
+    formData.append('_captcha', 'false');
 
-    fetch('/api/contact', {
+    const emailPromise = fetch('https://formsubmit.co/ajax/arunachalam@sevenstarslogistics.com', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    }).catch(err => {
+      console.warn('Commercial enquiry email dispatch notice:', err);
+    });
+
+    const payload = Object.fromEntries(formData.entries());
+    const localPromise = fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     }).catch(err => {
       console.warn('Enquiry dispatch notice:', err);
-    }).finally(() => {
+    });
+
+    Promise.allSettled([emailPromise, localPromise]).finally(() => {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
       homeForm.reset();
       if (modal) {
+        modal.style.display = 'flex';
         modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
       }
     });
   });

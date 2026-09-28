@@ -1604,7 +1604,7 @@
       <p style="color: var(--text-muted); font-size: 0.9375rem; line-height: 1.5; margin-bottom: 1.5rem;">
         Thank you for contacting Seven Stars Logistics Private Limited. Your shipment parameters have been recorded and assigned to a certified logistics coordinator.
       </p>
-      <button type="button" class="btn btn-primary" onclick="document.getElementById('form-success-modal').style.display='none'">Close Window</button>
+      <button type="button" id="modal-close-btn" class="btn btn-primary" onclick="document.getElementById('form-success-modal').style.display='none'; document.getElementById('form-success-modal').classList.remove('active'); document.body.style.overflow='';">Close Window</button>
     </div>
   </div>
 
