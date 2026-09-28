@@ -45,8 +45,42 @@ function saveRecord(filename, record) {
 }
 
 const server = http.createServer((req, res) => {
+  // CORS Headers for API calls and external database sync
+  const setCorsHeaders = () => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  };
+
+  if (req.method === 'OPTIONS' && req.url.startsWith('/api/')) {
+    setCorsHeaders();
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+
+  // Handle API Database Sync / Reading
+  if (req.method === 'GET' && (req.url === '/api/quotes' || req.url === '/api/quote')) {
+    setCorsHeaders();
+    const filePath = path.join(DATA_DIR, 'quotes.json');
+    const records = fs.existsSync(filePath) ? JSON.parse(fs.readFileSync(filePath, 'utf-8') || '[]') : [];
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(records, null, 2));
+    return;
+  }
+
+  if (req.method === 'GET' && (req.url === '/api/inquiries' || req.url === '/api/contact')) {
+    setCorsHeaders();
+    const filePath = path.join(DATA_DIR, 'inquiries.json');
+    const records = fs.existsSync(filePath) ? JSON.parse(fs.readFileSync(filePath, 'utf-8') || '[]') : [];
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(records, null, 2));
+    return;
+  }
+
   // Handle API Submissions
   if (req.method === 'POST' && req.url === '/api/quote') {
+    setCorsHeaders();
     let body = '';
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
@@ -66,6 +100,7 @@ const server = http.createServer((req, res) => {
   }
 
   if (req.method === 'POST' && req.url === '/api/contact') {
+    setCorsHeaders();
     let body = '';
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
