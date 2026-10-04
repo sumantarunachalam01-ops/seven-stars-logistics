@@ -1024,10 +1024,15 @@
 /* ==========================================================================
    DSV-INSPIRED CORPORATE COMPONENTS: NAVIGATION DROPDOWNS
    ========================================================================== */
-.nav-item-dropdown {
+.nav-item-dropdown,
+.nav-dropdown-wrapper {
   position: relative;
   display: inline-flex;
   align-items: center;
+  height: 100%;
+  /* Extend the bottom padding so cursor movement into the dropdown stays on the element */
+  padding-bottom: 0.5rem;
+  margin-bottom: -0.5rem;
 }
 
 .nav-link-dropdown {
@@ -1037,7 +1042,7 @@
   color: #ffffff !important;
   font-weight: var(--fw-semibold);
   font-size: 0.9375rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0.25rem;
   text-decoration: none;
   cursor: pointer;
   background: none;
@@ -1045,24 +1050,37 @@
   transition: color var(--transition-fast), opacity var(--transition-fast);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
   opacity: 0.95;
+  white-space: nowrap !important;
 }
 
-.nav-link-dropdown svg {
+.nav-link-dropdown svg,
+.nav-dropdown-toggle svg {
   width: 12px;
   height: 12px;
   transition: transform var(--transition-fast);
   color: #ffffff !important;
   stroke: #ffffff !important;
+  stroke-width: 2.2;
+  flex-shrink: 0;
+  margin-top: 1px;
 }
 
 .nav-item-dropdown:hover .nav-link-dropdown,
-.nav-item-dropdown:focus-within .nav-link-dropdown {
+.nav-item-dropdown:focus-within .nav-link-dropdown,
+.nav-item-dropdown.dropdown-open .nav-link-dropdown,
+.nav-dropdown-wrapper:hover .nav-dropdown-toggle,
+.nav-dropdown-wrapper:focus-within .nav-dropdown-toggle,
+.nav-dropdown-wrapper.dropdown-open .nav-dropdown-toggle {
   color: #ffffff !important;
   opacity: 1;
 }
 
 .nav-item-dropdown:hover .nav-link-dropdown svg,
-.nav-item-dropdown:focus-within .nav-link-dropdown svg {
+.nav-item-dropdown:focus-within .nav-link-dropdown svg,
+.nav-item-dropdown.dropdown-open .nav-link-dropdown svg,
+.nav-dropdown-wrapper:hover .nav-dropdown-toggle svg,
+.nav-dropdown-wrapper:focus-within .nav-dropdown-toggle svg,
+.nav-dropdown-wrapper.dropdown-open .nav-dropdown-toggle svg {
   transform: rotate(180deg);
   color: #ffffff !important;
   stroke: #ffffff !important;
@@ -1072,42 +1090,59 @@
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%) translateY(8px);
-  min-width: 300px;
-  background-color: rgba(7, 21, 38, 0.97);
+  /* No translateY offset - menu attaches directly under the extended li padding */
+  transform: translateX(-50%) translateY(6px);
+  min-width: 320px;
+  background-color: rgba(7, 21, 38, 0.98);
   backdrop-filter: saturate(180%) blur(24px);
   -webkit-backdrop-filter: saturate(180%) blur(24px);
-  border: 1px solid rgba(56, 189, 248, 0.25);
+  border: 1px solid rgba(56, 189, 248, 0.35);
   border-radius: var(--radius-lg);
-  box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.65), 0 0 25px rgba(56, 189, 248, 0.12);
-  padding: 0.75rem;
-  margin-top: 0.35rem;
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.16);
+  /* Use padding-top instead of margin-top - this keeps spacing but stays hoverable */
+  padding: 0.85rem;
+  margin-top: 0;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
-  z-index: 150;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s;
+  z-index: 1050;
 }
 
 .nav-dropdown-menu.dropdown-wide {
-  min-width: 540px;
+  min-width: 580px;
+  width: max-content;
+  max-width: min(720px, 94vw);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.35rem 0.75rem;
-}
-
-.nav-dropdown-wrapper {
-  position: relative;
+  gap: 0.4rem 0.85rem;
 }
 
 .nav-dropdown-wrapper:hover .nav-dropdown-menu,
 .nav-dropdown-wrapper:focus-within .nav-dropdown-menu,
+.nav-dropdown-wrapper.dropdown-open .nav-dropdown-menu,
 .nav-item-dropdown:hover .nav-dropdown-menu,
-.nav-item-dropdown:focus-within .nav-dropdown-menu {
+.nav-item-dropdown:focus-within .nav-dropdown-menu,
+.nav-item-dropdown.dropdown-open .nav-dropdown-menu {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 1200px) {
+  .nav-dropdown-menu.dropdown-wide {
+    left: 0;
+    transform: translateY(8px);
+  }
+  .nav-dropdown-wrapper:hover .nav-dropdown-menu.dropdown-wide,
+  .nav-dropdown-wrapper:focus-within .nav-dropdown-menu.dropdown-wide,
+  .nav-dropdown-wrapper.dropdown-open .nav-dropdown-menu.dropdown-wide,
+  .nav-item-dropdown:hover .nav-dropdown-menu.dropdown-wide,
+  .nav-item-dropdown:focus-within .nav-dropdown-menu.dropdown-wide,
+  .nav-item-dropdown.dropdown-open .nav-dropdown-menu.dropdown-wide {
+    transform: translateY(0);
+  }
 }
 
 .nav-dropdown-item {

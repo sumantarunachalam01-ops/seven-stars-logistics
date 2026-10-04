@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initStickyHeader();
+  initNavDropdowns();
   initMobileDrawer();
   initActionBar();
   initBackToTop();
@@ -82,6 +83,80 @@ function initStickyHeader() {
   window.addEventListener('scroll', handleScroll, { passive: true });
   window.addEventListener('resize', handleScroll, { passive: true });
   handleScroll();
+}
+
+/**
+ * Enhanced Desktop & Touch Navigation Dropdown Interaction
+ * Prevents premature closing, adds hover grace-period and click-toggle accessibility
+ */
+function initNavDropdowns() {
+  const dropdownItems = document.querySelectorAll('.nav-item-dropdown, .nav-dropdown-wrapper');
+  if (!dropdownItems.length) return;
+
+  dropdownItems.forEach(item => {
+    const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
+    const menu = item.querySelector('.nav-dropdown-menu');
+    if (!trigger || !menu) return;
+
+    let closeTimer = null;
+
+    const openDropdown = () => {
+      clearTimeout(closeTimer);
+      dropdownItems.forEach(other => {
+        if (other !== item) {
+          other.classList.remove('dropdown-open');
+          const otherTrigger = other.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
+          if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+      item.classList.add('dropdown-open');
+      trigger.setAttribute('aria-expanded', 'true');
+    };
+
+    const closeDropdown = () => {
+      closeTimer = setTimeout(() => {
+        item.classList.remove('dropdown-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }, 200); // 200ms grace period so moving cursor into menu never closes it
+    };
+
+    item.addEventListener('mouseenter', openDropdown);
+    item.addEventListener('mouseleave', closeDropdown);
+
+    // Support click on desktop or tap on touch devices
+    trigger.addEventListener('click', (e) => {
+      // Toggle dropdown on click
+      const isOpen = item.classList.contains('dropdown-open');
+      if (isOpen) {
+        item.classList.remove('dropdown-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      } else {
+        openDropdown();
+      }
+    });
+  });
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-item-dropdown, .nav-dropdown-wrapper')) {
+      dropdownItems.forEach(item => {
+        item.classList.remove('dropdown-open');
+        const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // Close dropdowns on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdownItems.forEach(item => {
+        item.classList.remove('dropdown-open');
+        const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
 }
 
 /**
