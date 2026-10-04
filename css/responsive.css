@@ -5,7 +5,7 @@
 
 /* Global Mobile Overflow Guard */
 html, body {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
   width: 100%;
   max-width: 100vw;
   -webkit-text-size-adjust: 100%;
@@ -42,20 +42,66 @@ img, svg, video, canvas {
    Tablet Screens (Max 991px)
    -------------------------------------------------------------------------- */
 @media (max-width: 991px) {
+  .site-header {
+    margin-bottom: -105px;
+  }
+
+  .header-nav-inner,
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.65rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .header-emblem {
+    width: 46px;
+    height: 46px;
+  }
+
+  .header-center {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .brand-title-main {
+    font-size: clamp(0.82rem, 2.8vw, 1.05rem);
+    white-space: normal;
+  }
+
+  .brand-title-sub {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    white-space: normal;
+  }
+
   .nav-menu {
     display: none;
   }
 
-  .header-actions .header-track-link {
-    display: none;
+  .header-right {
+    gap: 0.5rem;
+  }
+
+  .btn-header-cta {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8rem;
   }
 
   .menu-toggle {
     display: inline-flex;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+
+  .menu-toggle svg {
+    stroke: #ffffff;
   }
 
   .hero {
-    padding: 4rem 0 6rem 0;
+    padding: 9.5rem 0 6rem 0;
   }
 
   .action-bar-wrapper {
@@ -198,14 +244,14 @@ img, svg, video, canvas {
     object-fit: contain;
   }
 
-  .header-actions .btn {
-    display: none; /* Keep header perfectly serene and uncluttered */
+  .btn-header-cta {
+    display: none; /* Keep mobile header clean and uncluttered */
   }
 
   /* Hero Section: Apple Keynote Showcase */
   .hero {
     text-align: center !important;
-    padding: 4.25rem 1.25rem 5rem 1.25rem !important;
+    padding: 8.5rem 1.25rem 5rem 1.25rem !important;
   }
 
   .hero-inner {

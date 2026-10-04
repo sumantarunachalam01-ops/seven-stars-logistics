@@ -109,7 +109,8 @@
   --z-negative:    -1;
   --z-elevated:    10;
   --z-sticky:      100;
-  --z-drawer:      900;
-  --z-modal:       1000;
-  --z-toast:       1100;
+  --z-sticky-nav:  1000;
+  --z-drawer:      1100;
+  --z-modal:       1200;
+  --z-toast:       1300;
 }

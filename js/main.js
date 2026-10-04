@@ -57,7 +57,21 @@ function initStickyHeader() {
   const header = document.querySelector('.site-header');
   if (!header) return;
 
+  const brandHeader = document.querySelector('.site-brand-header');
+
   const handleScroll = () => {
+    if (brandHeader) {
+      // When the top brand banner exists (home page), only reveal the scrolled navbar logo
+      // and scrolled styling AFTER the top brand header has completely scrolled out of the viewport.
+      const rect = brandHeader.getBoundingClientRect();
+      if (rect.bottom <= 0) {
+        header.classList.add('header-scrolled');
+      } else {
+        header.classList.remove('header-scrolled');
+      }
+      return;
+    }
+
     if (window.scrollY > 20) {
       header.classList.add('header-scrolled');
     } else {
@@ -66,6 +80,7 @@ function initStickyHeader() {
   };
 
   window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleScroll, { passive: true });
   handleScroll();
 }
 
