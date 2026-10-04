@@ -86,9 +86,10 @@ function initStickyHeader() {
 }
 
 /**
- * Bulletproof Navigation Dropdown — uses document.mousemove + elementsFromPoint()
- * This approach is immune to positioning gaps between trigger and menu.
- * The dropdown stays open as long as the cursor is over the li OR the menu.
+ * Bulletproof Navigation Dropdown
+ * Tracks mouseenter/mouseleave on both the trigger and menu with a generous grace timer (450ms).
+ * This ensures users can smoothly and diagonally move their cursor from the trigger link
+ * into the menu box without it closing prematurely.
  */
 function initNavDropdowns() {
   const dropdownItems = Array.from(document.querySelectorAll('.nav-item-dropdown, .nav-dropdown-wrapper'));
@@ -98,12 +99,13 @@ function initNavDropdowns() {
   let closeTimer = null;
 
   const openDropdown = (item) => {
-    if (activeItem === item) return; // already open, nothing to do
     clearTimeout(closeTimer);
 
-    // Close any previously open dropdown
+    // Close any other open dropdown
     if (activeItem && activeItem !== item) {
-      closeImmediate(activeItem);
+      const prevTrigger = activeItem.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
+      activeItem.classList.remove('dropdown-open');
+      if (prevTrigger) prevTrigger.setAttribute('aria-expanded', 'false');
     }
 
     const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
@@ -112,62 +114,93 @@ function initNavDropdowns() {
     activeItem = item;
   };
 
-  const closeImmediate = (item) => {
-    const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
-    item.classList.remove('dropdown-open');
-    if (trigger) trigger.setAttribute('aria-expanded', 'false');
-    if (activeItem === item) activeItem = null;
-  };
-
-  const scheduleClose = () => {
+  const scheduleClose = (item) => {
     clearTimeout(closeTimer);
     closeTimer = setTimeout(() => {
-      if (activeItem) closeImmediate(activeItem);
-    }, 300);
+      if (item) {
+        const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
+        item.classList.remove('dropdown-open');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      }
+      if (activeItem === item) {
+        activeItem = null;
+      }
+    }, 450); // 450ms generous buffer allows plenty of time to move across the box
   };
 
-  // Track cursor position via mousemove on the document
-  document.addEventListener('mousemove', (e) => {
-    // Get all elements at the cursor position
-    const els = document.elementsFromPoint(e.clientX, e.clientY);
+  const closeImmediate = (item) => {
+    clearTimeout(closeTimer);
+    if (item) {
+      const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
+      item.classList.remove('dropdown-open');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    }
+    if (activeItem === item) {
+      activeItem = null;
+    }
+  };
 
-    // Find if cursor is over a dropdown trigger item or its menu
-    let hoveredItem = null;
-    for (const el of els) {
-      // Check if el is a dropdown item or a descendant of one
-      const parentItem = el.closest('.nav-item-dropdown, .nav-dropdown-wrapper');
-      if (parentItem && dropdownItems.includes(parentItem)) {
-        hoveredItem = parentItem;
-        break;
-      }
+  dropdownItems.forEach((item) => {
+    const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
+    const menu = item.querySelector('.nav-dropdown-menu');
+
+    // Trigger item mouseenter / mouseleave
+    item.addEventListener('mouseenter', () => {
+      openDropdown(item);
+    });
+
+    item.addEventListener('mouseleave', () => {
+      scheduleClose(item);
+    });
+
+    // Menu mouseenter / mouseleave
+    if (menu) {
+      menu.addEventListener('mouseenter', () => {
+        openDropdown(item);
+      });
+      menu.addEventListener('mouseleave', () => {
+        scheduleClose(item);
+      });
     }
 
-    if (hoveredItem) {
-      // Cursor is over a dropdown item (trigger or menu) — open it and cancel close
-      clearTimeout(closeTimer);
-      openDropdown(hoveredItem);
-    } else if (activeItem) {
-      // Cursor left all dropdowns — schedule close
-      scheduleClose();
+    // Keyboard navigation: open on focus, close when focus leaves the dropdown completely
+    item.addEventListener('focusin', () => {
+      openDropdown(item);
+    });
+
+    item.addEventListener('focusout', (e) => {
+      if (!item.contains(e.relatedTarget)) {
+        scheduleClose(item);
+      }
+    });
+
+    // Touch / Mobile toggle
+    if (trigger) {
+      trigger.addEventListener('click', (e) => {
+        if (window.innerWidth <= 991 || ('ontouchstart' in window && window.matchMedia('(hover: none)').matches)) {
+          e.preventDefault();
+          if (item.classList.contains('dropdown-open')) {
+            closeImmediate(item);
+          } else {
+            openDropdown(item);
+          }
+        }
+      });
     }
   });
 
-  // Click on trigger: navigate to the href (link behavior preserved)
-  // Click on menu item: navigate normally
-  // Click anywhere outside: close immediately
+  // Global click outside: close immediately
   document.addEventListener('click', (e) => {
     const clickedItem = e.target.closest('.nav-item-dropdown, .nav-dropdown-wrapper');
-    if (!clickedItem) {
-      clearTimeout(closeTimer);
-      if (activeItem) closeImmediate(activeItem);
+    if (!clickedItem && activeItem) {
+      closeImmediate(activeItem);
     }
   });
 
   // Close on Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      clearTimeout(closeTimer);
-      if (activeItem) closeImmediate(activeItem);
+    if (e.key === 'Escape' && activeItem) {
+      closeImmediate(activeItem);
     }
   });
 }
