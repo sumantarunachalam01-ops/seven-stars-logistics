@@ -78,7 +78,7 @@
    -------------------------------------------------------------------------- */
 .site-brand-header {
   background-color: #ffffff;
-  padding: 0.85rem 1.5rem 0.75rem 1.5rem;
+  padding: 0.25rem 1.5rem 0.35rem 1.5rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
   z-index: 90;
@@ -109,7 +109,7 @@
 
 .site-brand-header .header-logo img,
 .site-brand-header .header-logo svg {
-  height: 98px;
+  height: 76px;
   width: auto;
   max-width: min(840px, 92vw);
   display: block;
