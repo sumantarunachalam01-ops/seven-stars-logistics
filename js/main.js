@@ -102,6 +102,7 @@ function initNavDropdowns() {
 
     const openDropdown = () => {
       clearTimeout(closeTimer);
+      // Close all other dropdowns
       dropdownItems.forEach(other => {
         if (other !== item) {
           other.classList.remove('dropdown-open');
@@ -113,21 +114,31 @@ function initNavDropdowns() {
       trigger.setAttribute('aria-expanded', 'true');
     };
 
-    const closeDropdown = () => {
+    const scheduleClose = () => {
       closeTimer = setTimeout(() => {
         item.classList.remove('dropdown-open');
         trigger.setAttribute('aria-expanded', 'false');
-      }, 200); // 200ms grace period so moving cursor into menu never closes it
+      }, 300); // 300ms grace period – enough time for cursor to travel into the menu
     };
 
+    const cancelClose = () => {
+      clearTimeout(closeTimer);
+    };
+
+    // Trigger element: open on enter, schedule close on leave
     item.addEventListener('mouseenter', openDropdown);
-    item.addEventListener('mouseleave', closeDropdown);
+    item.addEventListener('mouseleave', scheduleClose);
+
+    // Menu element: cancel close when cursor re-enters the menu
+    // (safety net in case cursor briefly leaves the li bounding box)
+    menu.addEventListener('mouseenter', cancelClose);
+    menu.addEventListener('mouseleave', scheduleClose);
 
     // Support click on desktop or tap on touch devices
     trigger.addEventListener('click', (e) => {
-      // Toggle dropdown on click
       const isOpen = item.classList.contains('dropdown-open');
       if (isOpen) {
+        clearTimeout(closeTimer);
         item.classList.remove('dropdown-open');
         trigger.setAttribute('aria-expanded', 'false');
       } else {
@@ -136,7 +147,7 @@ function initNavDropdowns() {
     });
   });
 
-  // Close dropdowns on outside click
+  // Close all dropdowns on outside click
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.nav-item-dropdown, .nav-dropdown-wrapper')) {
       dropdownItems.forEach(item => {
