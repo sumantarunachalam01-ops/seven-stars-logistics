@@ -86,86 +86,88 @@ function initStickyHeader() {
 }
 
 /**
- * Enhanced Desktop & Touch Navigation Dropdown Interaction
- * Prevents premature closing, adds hover grace-period and click-toggle accessibility
+ * Bulletproof Navigation Dropdown — uses document.mousemove + elementsFromPoint()
+ * This approach is immune to positioning gaps between trigger and menu.
+ * The dropdown stays open as long as the cursor is over the li OR the menu.
  */
 function initNavDropdowns() {
-  const dropdownItems = document.querySelectorAll('.nav-item-dropdown, .nav-dropdown-wrapper');
+  const dropdownItems = Array.from(document.querySelectorAll('.nav-item-dropdown, .nav-dropdown-wrapper'));
   if (!dropdownItems.length) return;
 
-  dropdownItems.forEach(item => {
+  let activeItem = null;
+  let closeTimer = null;
+
+  const openDropdown = (item) => {
+    if (activeItem === item) return; // already open, nothing to do
+    clearTimeout(closeTimer);
+
+    // Close any previously open dropdown
+    if (activeItem && activeItem !== item) {
+      closeImmediate(activeItem);
+    }
+
     const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
-    const menu = item.querySelector('.nav-dropdown-menu');
-    if (!trigger || !menu) return;
+    item.classList.add('dropdown-open');
+    if (trigger) trigger.setAttribute('aria-expanded', 'true');
+    activeItem = item;
+  };
 
-    let closeTimer = null;
+  const closeImmediate = (item) => {
+    const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
+    item.classList.remove('dropdown-open');
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    if (activeItem === item) activeItem = null;
+  };
 
-    const openDropdown = () => {
-      clearTimeout(closeTimer);
-      // Close all other dropdowns
-      dropdownItems.forEach(other => {
-        if (other !== item) {
-          other.classList.remove('dropdown-open');
-          const otherTrigger = other.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
-          if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
-        }
-      });
-      item.classList.add('dropdown-open');
-      trigger.setAttribute('aria-expanded', 'true');
-    };
+  const scheduleClose = () => {
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => {
+      if (activeItem) closeImmediate(activeItem);
+    }, 300);
+  };
 
-    const scheduleClose = () => {
-      closeTimer = setTimeout(() => {
-        item.classList.remove('dropdown-open');
-        trigger.setAttribute('aria-expanded', 'false');
-      }, 300); // 300ms grace period – enough time for cursor to travel into the menu
-    };
+  // Track cursor position via mousemove on the document
+  document.addEventListener('mousemove', (e) => {
+    // Get all elements at the cursor position
+    const els = document.elementsFromPoint(e.clientX, e.clientY);
 
-    const cancelClose = () => {
-      clearTimeout(closeTimer);
-    };
-
-    // Trigger element: open on enter, schedule close on leave
-    item.addEventListener('mouseenter', openDropdown);
-    item.addEventListener('mouseleave', scheduleClose);
-
-    // Menu element: cancel close when cursor re-enters the menu
-    // (safety net in case cursor briefly leaves the li bounding box)
-    menu.addEventListener('mouseenter', cancelClose);
-    menu.addEventListener('mouseleave', scheduleClose);
-
-    // Support click on desktop or tap on touch devices
-    trigger.addEventListener('click', (e) => {
-      const isOpen = item.classList.contains('dropdown-open');
-      if (isOpen) {
-        clearTimeout(closeTimer);
-        item.classList.remove('dropdown-open');
-        trigger.setAttribute('aria-expanded', 'false');
-      } else {
-        openDropdown();
+    // Find if cursor is over a dropdown trigger item or its menu
+    let hoveredItem = null;
+    for (const el of els) {
+      // Check if el is a dropdown item or a descendant of one
+      const parentItem = el.closest('.nav-item-dropdown, .nav-dropdown-wrapper');
+      if (parentItem && dropdownItems.includes(parentItem)) {
+        hoveredItem = parentItem;
+        break;
       }
-    });
-  });
+    }
 
-  // Close all dropdowns on outside click
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.nav-item-dropdown, .nav-dropdown-wrapper')) {
-      dropdownItems.forEach(item => {
-        item.classList.remove('dropdown-open');
-        const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
-        if (trigger) trigger.setAttribute('aria-expanded', 'false');
-      });
+    if (hoveredItem) {
+      // Cursor is over a dropdown item (trigger or menu) — open it and cancel close
+      clearTimeout(closeTimer);
+      openDropdown(hoveredItem);
+    } else if (activeItem) {
+      // Cursor left all dropdowns — schedule close
+      scheduleClose();
     }
   });
 
-  // Close dropdowns on Escape key
+  // Click on trigger: navigate to the href (link behavior preserved)
+  // Click on menu item: navigate normally
+  // Click anywhere outside: close immediately
+  document.addEventListener('click', (e) => {
+    const clickedItem = e.target.closest('.nav-item-dropdown, .nav-dropdown-wrapper');
+    if (!clickedItem) {
+      clearTimeout(closeTimer);
+      if (activeItem) closeImmediate(activeItem);
+    }
+  });
+
+  // Close on Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      dropdownItems.forEach(item => {
-        item.classList.remove('dropdown-open');
-        const trigger = item.querySelector('.nav-link-dropdown, .nav-dropdown-toggle');
-        if (trigger) trigger.setAttribute('aria-expanded', 'false');
-      });
+      clearTimeout(closeTimer);
+      if (activeItem) closeImmediate(activeItem);
     }
   });
 }
